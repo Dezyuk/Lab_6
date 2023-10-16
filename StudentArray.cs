@@ -12,7 +12,7 @@ namespace Lab6
 
         public StudentArray()
         {
-            _students = new HighSchoolStudent[0];
+            _students = new Student[0];
         }
 
         public void AddStudent(Student student)

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿using System.Text.RegularExpressions;
 
 namespace Lab6
 {
@@ -13,19 +7,26 @@ namespace Lab6
         private string _id;
         private byte _mark;
         private string _contact;
-        private string _className;
-        private bool _study;
         private const byte MIN_ID_LENGHT = 5;
         private const byte MAX_MARK = 12;
         private const byte MIN_MARK = 1;
 
 
+        public HighSchoolStudent(string id, byte mark, string contact, string name, byte age, bool gender) : base(name, age, gender)
+        {
+            ID = id;
+            Mark = mark;
+            Contact = contact;
+        }
+
+        /// <summary>
+        /// Свойство ID ученика, возвращает Incorrect id, если пытаемся присвоить пустую строку или строку длиной менее 5 (MIN_ID_LENGHT).
+        /// </summary>
         public string ID
         {
             get => _id;
             set
             {
-                //Проверка не является ли переданная строка Null, а также что длина ID больше или равно 5(MIN_ID_LENGHT).
                 if (!string.IsNullOrEmpty(value) && value.Length >= MIN_ID_LENGHT)
                 {
                     _id = (value.ToUpper()).Trim();
@@ -36,6 +37,10 @@ namespace Lab6
                 }
             }
         }
+
+        /// <summary>
+        /// Свойство оценка ученика, возвращает Incorrect mark, если пытаемся присвоить число меньше 1 или больше 12.
+        /// </summary>
         public byte Mark
         {
             get => _mark;
@@ -52,6 +57,10 @@ namespace Lab6
                 }
             }
         }
+
+        /// <summary>
+        /// Свойство номер телефона ученика, возвращает Incorrect phone number, если пытаемся присвоить  пустую строку или строку не в формате +***********.
+        /// </summary>
         public string Contact
         {
             get => _contact;
@@ -69,52 +78,9 @@ namespace Lab6
             }
         }
 
-
-        public string ClassName
-        {
-            get => _className;
-            set
-            {
-                //Проверка не является ли переданная строка Null.
-                if (!string.IsNullOrEmpty(value))
-                {
-                    _className = value.Trim();
-                }
-                else
-                {
-                    throw new FormatException("Incorrect name.");
-                }
-            }
-        }
-
-
-        public bool Study1
-        {
-            get => _study;
-            set => _study = value;
-        }
-
-
-        public HighSchoolStudent(string id, byte mark, string contact, string name, byte age, bool gender) : base(name, age, gender)
-        {
-            ID = id;
-            Mark = mark;
-            Contact = contact;
-        }
-
-        public override void AttendClass(string className)
-        {
-            ClassName = className;
-        }
-
-        public override void Study()
-        {
-            Study1 = !Study1;
-        }
-
         public override string ToString()
         {
-            return base.ToString() + $"ID: {ID};\nMark: {Mark};\nContact: {Contact}\nClass name: {ClassName};\nStudy: {Study1};\n";
+            return base.ToString() + $"ID: {ID};\nMark: {Mark};\nContact: {Contact}\n";
         }
     }
 }

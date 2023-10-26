@@ -2,11 +2,13 @@
 
 namespace Lab6
 {
-    public class HighSchoolStudent : Student
+    public class HighSchoolStudent : Student, IStudent
     {
         private string _id;
         private byte _mark;
         private string _contact;
+        private string _className;
+        private bool _study;
         private const byte MIN_ID_LENGHT = 5;
         private const byte MAX_MARK = 12;
         private const byte MIN_MARK = 1;
@@ -78,9 +80,54 @@ namespace Lab6
             }
         }
 
+        /// <summary>
+        /// Свойство имя класса в котором находится ученик, возвращает Incorrect class name, если пытаемся присвоить пустую строку или строку с одним символом.
+        /// </summary>
+        private string ClassName
+        {
+            get => _className;
+            set
+            {
+                string newValue = value.Trim();
+                if (!string.IsNullOrEmpty(value) && newValue.Length > 1)
+                {
+                    _className = newValue;
+                }
+                else
+                {
+                    throw new FormatException("Incorrect class name.");
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// Свойство состояния ученика(сейчас учится true, нет false).
+        /// </summary>
+        public bool Study1
+        {
+            get => _study;
+            set => _study = value;
+        }
+
+        /// <summary>
+        /// Метод изменяющий свойство имя класса в котором находится ученик.
+        /// </summary>
+        public override void AttendClass(string className)
+        {
+            ClassName = className;
+        }
+
+        /// <summary>
+        /// Метод изменяющий свойство состояния ученика(сейчас учится true, нет false).
+        /// </summary>
+        public override void Study()
+        {
+            Study1 = !Study1;
+        }
         public override string ToString()
         {
-            return base.ToString() + $"ID: {ID};\nMark: {Mark};\nContact: {Contact}\n";
+            return base.ToString() + $"ID: {ID};\nMark: {Mark};\nContact: {Contact};\nClass name: {ClassName};\nStudy: {Study1};\n";
         }
     }
 }

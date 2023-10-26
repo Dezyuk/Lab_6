@@ -6,8 +6,6 @@ namespace Lab6
         private readonly string _name;
         private byte _age;
         private bool _gender;
-        private string _className;
-        private bool _study;
         private const byte MAX_YEAR = 100;
 
 
@@ -65,55 +63,14 @@ namespace Lab6
             set => _gender = value;
         }
 
-        /// <summary>
-        /// Свойство имя класса в котором находится ученик, возвращает Incorrect class name, если пытаемся присвоить пустую строку или строку с одним символом.
-        /// </summary>
-        private string ClassName 
-        {
-            get => _className; 
-            set
-            {
-                string newValue = value.Trim();
-                if (!string.IsNullOrEmpty(value) && newValue.Length > 1)
-                {
-                    _className = newValue;
-                }
-                else
-                {
-                    throw new FormatException("Incorrect class name.");
-                }
-            }
+        public abstract void AttendClass(string className);
 
-        }
 
-        /// <summary>
-        /// Свойство состояния ученика(сейчас учится true, нет false).
-        /// </summary>
-        public bool Study1 
-        {
-            get => _study; 
-            set => _study = value; 
-        }
-
-        /// <summary>
-        /// Метод изменяющий свойство имя класса в котором находится ученик.
-        /// </summary>
-        public void AttendClass(string className)
-        {
-            ClassName = className;
-        }
-
-        /// <summary>
-        /// Метод изменяющий свойство состояния ученика(сейчас учится true, нет false).
-        /// </summary>
-        public void Study()
-        {
-            Study1 = !Study1;
-        }
+        public abstract void Study();
 
         public override string ToString()
         {
-            return Gender ? $"Student:\nName: {Name};\nAge: {Age}\nGender: Man\nClass name: {ClassName};\nStudy: {Study1};\n" : $"Student:\nName: {Name};\nAge: {Age}\nGender: Woman\nClass name: {ClassName};\nStudy: {Study1};\n";
+            return Gender ? $"Student:\nName: {Name};\nAge: {Age}\nGender: Man\n" : $"Student:\nName: {Name};\nAge: {Age}\nGender: Woman\n";
         }
 
     }

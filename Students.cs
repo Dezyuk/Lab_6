@@ -64,7 +64,7 @@ namespace Lab6
         /// <exception cref="FormatException"></exception>
         public void EditStudents(uint index, Student student)
         {
-            if (index >= 0 && index < _students.Length && !(student is null))
+            if (index >= 0 && index < _students.Length && (student is not null))
             {
                 _students[index] = student;
             }
